@@ -1,7 +1,7 @@
 const db = require('knex')(require('../../knexfile'))
 require('dotenv').config();
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jsonSecretKey = process.env.JSON_SECRET_KEY;
 
 

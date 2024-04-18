@@ -3,9 +3,9 @@ const inventoryTransactionController = require('../../controllers/inventoryTrans
 
 router.route('/').post(inventoryTransactionController.add)
 
-router.route('/:id').get(inventoryTransactionController.findOneOrder)
 router.route('/delivery').get(inventoryTransactionController.deliveryItemsList)
 
 router.route('/purchase').get(inventoryTransactionController.purchaseOrdersList)
+router.route('/:id').get(inventoryTransactionController.findOneOrder)
 
 module.exports = router

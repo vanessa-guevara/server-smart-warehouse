@@ -83,6 +83,7 @@ const findOneOrder = async (_req, res) => {
     }
 
     const order = {
+      ID: data[0].ID,
       OrderID: data[0].OrderID,
       OrderDate: data[0].OrderDate,
       LogisticDate: data[0].LogisticDate,
@@ -122,7 +123,7 @@ const add = async (_req, res) => {
   const { order, orderDetails } = _req.body;
   
   try {
-    const result = await db.transaction(async trx => {
+    const transactionId = await db.transaction(async trx => {
 
       //add doc header
       const [Id] = await trx('inventory_transactions').insert(order, 'id');
@@ -280,12 +281,16 @@ const add = async (_req, res) => {
 
 
       }
+      return Id;
     });
+
+    console.log("Transaction ID:", transactionId);
     
     res.json({
       success: true,
-      Id: result,
-      message: 'Inventory transaction and details successfully created.'
+      id:transactionId,
+      message: 'Inventory transaction and details successfully created.',
+  
     });
   } catch (error) {
     console.log(error)

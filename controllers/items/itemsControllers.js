@@ -172,28 +172,7 @@ const findLocationsbyId = async (_req, res) => {
 const add = async (_req, res) => {
   try {
 
-    const [newItemId] = await db('items').insert(
-      {
-        ItemCode: _req.body.item.ItemCode,
-        ItemName: _req.body.item.ItemName,
-        Unit: _req.body.item.Unit,
-        Weight: _req.body.item.Weight,
-        GroupCode: _req.body.item.GroupCode
-      },
-      'id'
-    )
-
-    const itemWhsData = _req.body.itemWhs.map(whs => {
-      return {
-        ...whs,
-        ItemID: newItemId
-      }
-    })
-
-    await db('items_has_warehouses').insert(itemWhsData)
-   
-
-    console.log(newItemId)
+    const [newItemId] = await db('items').insert(_req.body)
 
     res.status(200).json({ message: `Item succesful created ${newItemId}` })
   } catch (err) {

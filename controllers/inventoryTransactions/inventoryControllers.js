@@ -94,7 +94,8 @@ const findOneOrder = async (_req, res) => {
       BusinessPartnerName: data[0].BusinessPartnerName,
       Address: data[0].Address,
       City: data[0].City,
-      Country: data[0].Country
+      Country: data[0].Country,
+      Comments: data[0].Comments
     }
 
     const orderdetails = data.map(row => ({
